@@ -1,5 +1,12 @@
+from fastmcp import FastMCP
 import kiwipiepy
 from collections import Counter
+
+# 1. 서버 인스턴스 생성
+mcp = FastMCP("kiwi-mcp-http")
+
+# 2. @mcp.tool 데코레이터로 함수를 '도구'로 등록
+@mcp.tool
 
 def extract_keywords(query: str, top_n: int = 2) -> list[str]:
     """
@@ -48,15 +55,6 @@ def extract_keywords(query: str, top_n: int = 2) -> list[str]:
     return keywords
 
 
-queries = [
-    "서울에서 맛있는 한식 레스토랑을 추천해줘",
-    "파이썬으로 머신러닝 모델을 학습시키는 방법이 뭐야?",
-    "최근 인공지능 기술 동향이 어떻게 되나요?",
-    "강남역 근처 주차장 정보 알려줘",
-     "30대 여성이 봄에 입기 좋은 원피스 추천해줘",
-]
-
-for q in queries:
-    keywords = extract_keywords(q, top_n=3)
-    print(f"질의: {q}")
-    print(f"키워드: {keywords}\n")
+# 3. 서버 실행 (스크립트가 직접 실행될 때만)
+if __name__ == "__main__":
+    mcp.run(transport="http", host="0.0.0.0", port=8000 )
