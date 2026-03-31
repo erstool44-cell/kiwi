@@ -7,7 +7,6 @@ mcp = FastMCP("kiwi-mcp-http")
 
 # 2. @mcp.tool 데코레이터로 함수를 '도구'로 등록
 @mcp.tool
-
 def extract_keywords(query: str, top_n: int = 2) -> list[str]:
     """
     한국어 질의에서 중요 키워드를 추출합니다.
