@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-import kiwipiepy
+from kiwipiepy import Kiwi
 from collections import Counter
 
 # 1. 서버 인스턴스 생성
@@ -18,7 +18,7 @@ def extract_keywords(query: str, top_n: int = 2) -> list[str]:
     Returns:
         상위 키워드 리스트
     """
-    kiwi = kiwipiepy.Kiwi()
+    kiwi = Kiwi()
     
     # 불필요한 단어 (불용어) 목록
     stopwords = {
@@ -52,7 +52,6 @@ def extract_keywords(query: str, top_n: int = 2) -> list[str]:
         keywords += extras[:top_n - len(keywords)]
     
     return keywords
-
 
 # 3. 서버 실행 (스크립트가 직접 실행될 때만)
 if __name__ == "__main__":
